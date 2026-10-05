@@ -29,6 +29,9 @@ Google Play (closed testing, public release October 2026)
 | **Study Hub** | Semesters, courses, credits and grades — read in from a photo of your curriculum, with text recognition running on your own device. |
 | **Capture** | Drop in slides, PDFs, photos or Office files; their text becomes searchable and ChoumarOS suggests where each belongs. |
 | **AI Assistant** | Explanations, revision and exam practice grounded in your own notes — every answer cites its sources. |
+| **Flashcards** | Spaced repetition: each card comes back when you are about to forget it. |
+| **Exams and calendar** | A countdown to your next exams, and your semester exported to any calendar app. |
+| **Share with classmates** | Share one course by a read-only link; a classmate can copy it into their own workspace. One click ends the link. |
 | **Knowledge Graph** | See how your courses, notes and projects connect. |
 | **Three languages** | English, German and Arabic, with full right-to-left layout. |
 
@@ -47,12 +50,12 @@ private repository as of October 2026.
 - Layered: `app/features → application → domain ← infrastructure`; the domain imports no
   framework, database or browser code.
 - PostgreSQL is the single source of truth; every untrusted input is parsed with Zod.
-- 207 commits, about 67,000 lines in 479 files, 24 architecture decision records, 18 migrations.
+- 212 commits, about 85,000 lines in 577 files, 25 architecture decision records, 19 migrations.
 
 **Testing — nothing ships red**
-- 751 automated tests: unit tests plus integration tests against a real PostgreSQL database.
+- 795 automated tests: unit tests plus integration tests against a real PostgreSQL database.
   None skipped.
-- 163 browser tests with Playwright, accessibility audits with axe-core, and runs in Firefox
+- 345 browser test runs with Playwright, accessibility audits with axe-core, and runs in Firefox
   and WebKit for layout, focus and right-to-left behaviour.
 - Every release passes format, lint (0 warnings), type-check, tests and a production build.
 
@@ -62,6 +65,7 @@ private repository as of October 2026.
 - Content-Security-Policy, no secrets in the repository, `npm audit` at 0.
 - An internal audit once found a data leak between two accounts; it was closed the same day
   and is now covered by tests.
+- Sharing stores only a SHA-256 of each link, never the link itself; links can be stopped at once.
 - Hosted in Frankfurt; encrypted daily backups; GDPR account deletion and full export;
   cookieless analytics.
 
@@ -82,12 +86,45 @@ for the result. The test suite is the proof — not the model's promise.
   <img src="screenshots/phone-03-course.webp" alt="A course on a phone" width="28%">
 </p>
 
+## In three languages
+
+Every screen exists in English, German and Arabic. Arabic is a real right-to-left layout, not a
+mirrored afterthought.
+
+<p align="center">
+  <img src="screenshots/de/desktop-02-study.webp" alt="Study hub in German" width="49%">
+  <img src="screenshots/ar/desktop-02-study.webp" alt="Study hub in Arabic, right to left" width="49%">
+</p>
+<p align="center">
+  <img src="screenshots/de/phone-01-mission-control.webp" alt="Mission Control on a phone, in German" width="28%">
+  &nbsp;
+  <img src="screenshots/ar/phone-01-mission-control.webp" alt="Mission Control on a phone, in Arabic" width="28%">
+  &nbsp;
+  <img src="screenshots/ar/phone-04-graph.webp" alt="Knowledge graph on a phone, in Arabic" width="28%">
+</p>
+
+All screenshots, per language: [German](screenshots/de) · [Arabic](screenshots/ar).
+They come from a test account with invented data — no real student appears anywhere.
+
+## Launch visuals
+
+<p align="center">
+  <img src="promo/promo-photo-en.webp" alt="Your semester, one photo away" width="24%">
+  <img src="promo/promo-stamp-en.webp" alt="Tested by hundreds of automated tests" width="24%">
+  <img src="promo/promo-langs-en.webp" alt="Three languages" width="24%">
+  <img src="promo/promo-comic-en.webp" alt="Before and after: a semester in one place" width="24%">
+</p>
+
+The same visuals in [German and Arabic](promo).
+
 ## Roadmap
 
+Shipped in autumn 2026: spaced-repetition flashcards, an exam countdown, calendar export and
+sharing a course with classmates.
+
+Next:
 - Public release on Google Play (October 2026)
-- Calendar sync for lectures and exams
-- Spaced-repetition flashcards and an exam countdown
-- Sharing a course with classmates
+- Reporting shared content, and a second free AI model so the assistant never stops
 
 ## Built with
 
