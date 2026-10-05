@@ -53,9 +53,9 @@ private repository as of October 2026.
 - 212 commits, about 85,000 lines in 577 files, 25 architecture decision records, 19 migrations.
 
 **Testing — nothing ships red**
-- 795 automated tests: unit tests plus integration tests against a real PostgreSQL database.
+- 802 automated tests: unit tests plus integration tests against a real PostgreSQL database.
   None skipped.
-- 345 browser test runs with Playwright, accessibility audits with axe-core, and runs in Firefox
+- 346 browser test runs with Playwright, accessibility audits with axe-core, and runs in Firefox
   and WebKit for layout, focus and right-to-left behaviour.
 - Every release passes format, lint (0 warnings), type-check, tests and a production build.
 
