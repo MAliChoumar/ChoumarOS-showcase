@@ -10,7 +10,7 @@ assistant that answers from your own material and shows its sources.
 
 **Try it:** [choumaros.de](https://choumaros.de) ·
 [Microsoft Store](https://apps.microsoft.com/detail/9N7BWDMCXT58) ·
-Google Play (closed testing, public release October 2026)
+Google Play (closed test complete, public release requested)
 
 > This repository is a public showcase. The application's source code is private.
 > Designed, built, tested and operated by [Mohamad Ali Choumar](https://choumar.is-a.dev),
@@ -26,7 +26,7 @@ Google Play (closed testing, public release October 2026)
 | | |
 |---|---|
 | **Mission Control** | What needs you today, what you worked on last, how far each course has come. |
-| **Study Hub** | Semesters, courses, credits and grades — read in from a photo of your curriculum, with text recognition running on your own device. |
+| **Study Hub** | Semesters, courses, credits and grades — read in from a photo of your curriculum, with text recognition running on your own device; only the module names (not the photo) go to an AI for spelling repair, and you review every row before saving. |
 | **Capture** | Drop in slides, PDFs, photos or Office files; their text becomes searchable and ChoumarOS suggests where each belongs. |
 | **AI Assistant** | Explanations, revision and exam practice grounded in your own notes — every answer cites its sources. |
 | **Flashcards** | Spaced repetition: each card comes back when you are about to forget it. |
@@ -50,14 +50,16 @@ private repository as of October 2026.
 - Layered: `app/features → application → domain ← infrastructure`; the domain imports no
   framework, database or browser code.
 - PostgreSQL is the single source of truth; every untrusted input is parsed with Zod.
-- 212 commits, about 85,000 lines in 577 files, 25 architecture decision records, 19 migrations.
+- 216 commits since 30 July 2026, about 86,000 lines in 587 files, 25 architecture decision records, 19 migrations.
 
 **Testing — nothing ships red**
-- 802 automated tests: unit tests plus integration tests against a real PostgreSQL database.
+- 815 automated tests in 134 files: unit tests plus integration tests against a real PostgreSQL database.
   None skipped.
-- 346 browser test runs with Playwright, accessibility audits with axe-core, and runs in Firefox
-  and WebKit for layout, focus and right-to-left behaviour.
-- Every release passes format, lint (0 warnings), type-check, tests and a production build.
+- 347 browser test runs with Playwright, from 75 test definitions. The full suite runs in Edge; a
+  subset (phone layout, accessibility to WCAG 2.2 AA with axe-core, page titles) also runs in
+  Firefox and WebKit.
+- Every release passes six gates: format check, lint (0 warnings), strict type-check, unit and
+  integration tests, browser tests and a production build.
 
 **Security and privacy**
 - Row-level security on every table; one central capability policy decides who may do what,
@@ -74,11 +76,15 @@ private repository as of October 2026.
   semantic search runs on pgvector.
 - Retrieved content is treated as untrusted (prompt-injection defence), and the AI can never
   change data.
+- If the primary model fails, a second free model and a local engine take over, with simpler
+  answers. Without enough evidence in your notes, the assistant says so.
 
 **How it was built**
-AI coding agents (Claude Code) are a tool in this project, not its author. I write the
-requirements and architecture decisions, steer the implementation, review every diff and answer
-for the result. The test suite is the proof — not the model's promise.
+Most of the code was written with AI coding agents (Claude Code). I defined the product, the
+requirements and the priorities, made the product and architecture decisions, tested on real
+phones and laptops and reported concrete defects, and approved every production migration and
+release. I did not read every line by hand: the result is secured by six checks per release and
+my own end-to-end checks. The test suite is the proof — not the model's promise.
 
 <p align="center">
   <img src="screenshots/phone-01-mission-control.webp" alt="Mission Control on a phone" width="28%">
@@ -119,12 +125,13 @@ The same visuals in [German and Arabic](promo).
 
 ## Roadmap
 
-Shipped in autumn 2026: spaced-repetition flashcards, an exam countdown, calendar export and
-sharing a course with classmates.
+Shipped in autumn 2026: spaced-repetition flashcards, an exam countdown, calendar export (an
+.ics export, not a two-way sync), sharing a course with classmates by a revocable link with
+reporting of shared content, and a second free AI model plus a local engine as fallback.
 
 Next:
-- Public release on Google Play (October 2026)
-- Reporting shared content, and a second free AI model so the assistant never stops
+- Public release on Google Play: the closed test is complete (12 testers, 14 days) and production
+  access was requested on 16 October 2026; it is still pending.
 
 ## Built with
 
