@@ -10,7 +10,7 @@ assistant that answers from your own material and shows its sources.
 
 **Try it:** [choumaros.de](https://choumaros.de) ·
 [Microsoft Store](https://apps.microsoft.com/detail/9N7BWDMCXT58) ·
-Google Play (closed test complete, public release requested)
+Android: [install from Chrome in 30 seconds](https://choumaros.de/android) · Google Play coming soon
 
 > This repository is a public showcase. The application's source code is private.
 > Designed, built, tested and operated by [Mohamad Ali Choumar](https://choumar.is-a.dev),
@@ -50,12 +50,12 @@ private repository as of October 2026.
 - Layered: `app/features → application → domain ← infrastructure`; the domain imports no
   framework, database or browser code.
 - PostgreSQL is the single source of truth; every untrusted input is parsed with Zod.
-- 216 commits since 30 July 2026, about 86,000 lines in 587 files, 25 architecture decision records, 19 migrations.
+- 225 commits since 30 July 2026, about 87,000 lines in 601 files, 25 architecture decision records, 19 migrations.
 
 **Testing — nothing ships red**
-- 815 automated tests in 134 files: unit tests plus integration tests against a real PostgreSQL database.
+- 820 automated tests in 135 files: unit tests plus integration tests against a real PostgreSQL database.
   None skipped.
-- 347 browser test runs with Playwright, from 75 test definitions. The full suite runs in Edge; a
+- 355 browser test runs with Playwright, from 177 test definitions. The full suite runs in Edge; a
   subset (phone layout, accessibility to WCAG 2.2 AA with axe-core, page titles) also runs in
   Firefox and WebKit.
 - Every release passes six gates: format check, lint (0 warnings), strict type-check, unit and
@@ -125,13 +125,16 @@ The same visuals in [German and Arabic](promo).
 
 ## Roadmap
 
+Public launch: 27 October 2026.
+
 Shipped in autumn 2026: spaced-repetition flashcards, an exam countdown, calendar export (an
 .ics export, not a two-way sync), sharing a course with classmates by a revocable link with
 reporting of shared content, and a second free AI model plus a local engine as fallback.
 
 Next:
-- Public release on Google Play: the closed test is complete (12 testers, 14 days) and production
-  access was requested on 16 October 2026; it is still pending.
+- Public release on Google Play: after the first request (18 October 2026) Google asked for more
+  testing, so a second closed test is running. Until then, Android users can install ChoumarOS
+  from Chrome: [choumaros.de/android](https://choumaros.de/android).
 
 ## Built with
 
